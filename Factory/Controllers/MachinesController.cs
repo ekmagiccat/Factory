@@ -26,7 +26,7 @@ namespace Factory.Controllers
             Machine thisMachine = _db.Machines
                 .Include(machine => machine.JoinEntities)
                 .ThenInclude(join => join.Engineer)
-                .FirstOrDefault(Machine => machine.MachineId == id);
+                .FirstOrDefault(machine => machine.MachineId == id);
             return View(thisMachine);
         }
 
@@ -54,11 +54,11 @@ namespace Factory.Controllers
         public ActionResult AddEngineer(Machine machine, int engineerId)
         {
 #nullable enable
-            EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.EngineerId == engineerId && join.MachineId == Machine.MachineId));
+            EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.EngineerId == engineerId && join.MachineId == machine.MachineId));
 #nullable disable
             if (joinEntity == null && engineerId != 0)
             {
-                _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = Machine.MachineId });
+                _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
                 _db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = machine.MachineId });

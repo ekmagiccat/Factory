@@ -3,26 +3,26 @@
 }
 
 @using Factory.Models
-@model ToDoList.Models.Tag
+@model Factory.Models.Machine
 
-<h2>Tag Details</h2>
+<h2>Machine Detail</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This tag does not belong to any items</p>
+  <p>This machine doesn't have any current eningeers who can work on it.</p>
 }
 else
 {
-  <h4>Items the tag belongs to:</h4>
+  <h4>Engineers who work on this machine:</h4>
   <ul>
-  @foreach(ItemTag join in Model.JoinEntities)
+  @foreach(EngineerMachine join in Model.JoinEntities)
   {
-    <li>@join.Item.Description</li>
-    @using (Html.BeginForm("DeleteJoin", "Tags"))
+    <li>@join.Engineer.Description</li>
+    @using (Html.BeginForm("DeleteJoin", "Machines"))
     {
-      @Html.Hidden("joinId", @join.ItemTagId)
+      @Html.Hidden("joinId", @join.EngineerId)
       <input type="submit" value="Delete"/>
     }
   }
@@ -30,6 +30,6 @@ else
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.TagId })</p>
-<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
-<p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
+<p>@Html.ActionLink("Add an engineer", "AddEngineer", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Edit machine", "Edit", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Delete engineer", "Delete", new { id = Model.MachineId })</p>
