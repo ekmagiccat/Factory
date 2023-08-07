@@ -18,8 +18,7 @@ namespace Factory.Controllers
 
         public ActionResult Index()
         {
-            List<Engineer> model = _db.Engineers
-                                  .ToList();
+            List<Engineer> model = _db.Engineers.ToList();
             return View(model);
         }
 
@@ -47,7 +46,7 @@ namespace Factory.Controllers
 
         public ActionResult Edit(int id)
         {
-            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
             return View(thisEngineer);
         }
 
@@ -61,14 +60,14 @@ namespace Factory.Controllers
 
         public ActionResult Delete(int id)
         {
-            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
             return View(thisEngineer);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
             _db.Engineers.Remove(thisEngineer);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -76,7 +75,7 @@ namespace Factory.Controllers
 
         public ActionResult AddMachine(int id)
         {
-            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
             ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Title");
             return View(thisEngineer);
         }

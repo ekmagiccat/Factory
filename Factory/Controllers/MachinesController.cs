@@ -21,15 +21,6 @@ namespace Factory.Controllers
             return View(_db.Machines.ToList());
         }
 
-        public ActionResult Details(int id)
-        {
-            Machine thisMachine = _db.Machines
-                .Include(machine => machine.JoinEntities)
-                .ThenInclude(join => join.Engineer)
-                .FirstOrDefault(machine => machine.MachineId == id);
-            return View(thisMachine);
-        }
-
         public ActionResult Create()
         {
             return View();
@@ -42,10 +33,18 @@ namespace Factory.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Details(int id)
+        {
+            Machine thisMachine = _db.Machines
+                .Include(machine => machine.JoinEntities)
+                .ThenInclude(join => join.Engineer)
+                .FirstOrDefault(machine => machine.MachineId == id);
+            return View(thisMachine);
+        }
 
         public ActionResult AddEngineer(int id)
         {
-            Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+            Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
             ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Description");
             return View(thisMachine);
         }
@@ -66,7 +65,7 @@ namespace Factory.Controllers
 
         public ActionResult Edit(int id)
         {
-            Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+            Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
             return View(thisMachine);
         }
 
@@ -80,14 +79,14 @@ namespace Factory.Controllers
 
         public ActionResult Delete(int id)
         {
-            Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+            Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
             return View(thisMachine);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+            Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
             _db.Machines.Remove(thisMachine);
             _db.SaveChanges();
             return RedirectToAction("Index");

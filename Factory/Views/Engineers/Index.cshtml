@@ -4,11 +4,15 @@
 
 
 <h1>Engineers</h1>
-<h4><a href='/engineers/new'>Add a new engineer profile!</a></h4>
 
+<br>
 @using Factory.Models
 
-@foreach (Engineer engineer in @Model)
+<ul>@foreach (Engineer engineer in @Model)
 {
-    <p>@Html.ActionLink(engineer.Description, "Details", "Engineers", new {id = engineer.EngineerId})</p>
+    <li>@Html.ActionLink(engineer.Description, "Details", "Engineers", new {id = engineer.EngineerId})</li>
 }
+</ul>
+<br>
+
+<h4><a href='/engineers/create'>Add a new engineer profile!</a></h4>
