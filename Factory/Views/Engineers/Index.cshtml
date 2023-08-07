@@ -1,0 +1,14 @@
+@{
+    Layout = "_Layout";
+}
+
+
+<h1>Engingeers</h1>
+<h4><a href='/engineers/new'>Add a new engineer profile!</a></h4>
+
+@using Factory.Models
+
+@foreach (Engineer engineer in @Model)
+{
+    <p>@Html.ActionLink(engineer.Description, "Details", "Engineers", new {id = engineer.EngineerId})</p>
+}
