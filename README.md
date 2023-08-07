@@ -14,7 +14,7 @@
 
 ## Description
 
-This is an application that allows a user to create, edit, or delete engineers and machines in a factory. It uses a many-to-many database relationship.
+This is an application that allows a user to create, edit, or delete engineers and machines in a factory. The user can add machines to an engineer and vice versa. It uses a many-to-many database relationship.
 
 ## How To Run This Project
 
